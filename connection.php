@@ -9,6 +9,10 @@ function is_authenticated(): bool {
   return isset($_SESSION['user']);
 }
 
+function is_admin(): bool {
+  return is_authenticated() && $_SESSION['user']['is_admin'];
+}
+
 function error_message($error, $key) {
   if(isset($error[$key])) {
 ?>
@@ -17,14 +21,22 @@ function error_message($error, $key) {
   }
 }
 
+function post_value_initial($name, $arr): string {
+  if(isset($_POST[$name])) return $_POST[$name];
+  if(isset($arr[$name])) return $arr[$name];
+  return "";
+}
+
 function post_value($name): string {
   if(isset($_POST[$name])) return $_POST[$name];
   return "";
 }
 
-function query_all($conn, $sql, $type, ...$args) {
+function query_all($conn, $sql, $type="", ...$args) {
   $stmt = $conn->prepare($sql);
-  $stmt->bind_param($type, ...$args);
+  if(!empty($type)) {
+    $stmt->bind_param($type, ...$args);
+  }
   $stmt->execute();
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }

@@ -29,7 +29,10 @@ CREATE TABLE absensi (
 );
 
 -- roles Data
-INSERT INTO roles (nama) VALUES ('admin'), ('karyawan');
+INSERT INTO roles (id, nama) VALUES (1, 'admin'), (2, 'karyawan');
 
 -- Admin Data
-INSERT INTO karyawan (nama, email, password, role_id) VALUES ("Admin", "admin@admin.local", "$2y$10$8Wp5DmD4nGgL1HHyhX1Nx.Lug31irYcq0/p44mIMeMVdd8OgSotjS", 1);
+INSERT INTO karyawan (id, nama, email, password, role_id) VALUES (1, "Admin", "admin@admin.local", "$2y$10$8Wp5DmD4nGgL1HHyhX1Nx.Lug31irYcq0/p44mIMeMVdd8OgSotjS", 1);
+
+-- Dummy absensi
+INSERT INTO absensi (id, karyawan_id, selfie_masuk_path, latitude_masuk, longitude_masuk) VALUES (1, 1, "/upload/absensi/masuk_123.png", -6.123456, 103.123456)

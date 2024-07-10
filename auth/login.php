@@ -17,7 +17,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   if(!isset($error['password']) && strlen($password) < 8) $error["password"] = "Password minimal berisi 8 karakter!";
 
   if(count($error) < 1) {
-    $user = query_all($conn, "SELECT * FROM karyawan WHERE email=? LIMIT 1", "s", $email);
+    $user = query_all($conn, "SELECT karyawan.*, roles.nama=\"admin\" AS is_admin FROM karyawan INNER JOIN roles ON roles.id=karyawan.role_id WHERE email=? LIMIT 1", "s", $email);
     if(count($user) < 1) {
       $error["email"] = "Email atau password salah!";
     } else {
