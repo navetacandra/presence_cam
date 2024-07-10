@@ -3,10 +3,10 @@ include "./connection.php";
 
 if(is_authenticated()) {
   if(is_admin()) {
-    include "./admin/index.php";
+    return header('Location: /admin');
   } else {
-    include "./user/index.php";
+    return header('Location: /user');
   }
 } else {
-  include "./auth/login.php";
+  return header('Location: /auth/login.php');
 }

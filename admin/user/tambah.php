@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   if(count($error) < 1) {
     if($hasFile) {
       $path = "/upload/profile/" . uniqid() . "." . $type[1];
-      move_uploaded_file($tmpFile['tmp_name'], "/home/navetacandra/projects/presence_cam".$path);
+      move_uploaded_file($tmpFile['tmp_name'], "../../".$path);
     }
     $added = query_execute($conn, "INSERT INTO karyawan (nama, email, password, role_id, foto_profil) VALUES (?, ?, ?, ?, ?)", "sssss", $nama, $email, password_hash($password, PASSWORD_BCRYPT), $role, $path);
     if(!$added) {

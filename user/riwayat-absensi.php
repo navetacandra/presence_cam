@@ -1,13 +1,17 @@
 <?php
 include "../connection.php";
-if(!is_admin()) {
+if (!is_authenticated()) {
+  header('Location: /');
+  return;
+}
+if(is_admin()) {
   header('Location: /');
   return;
 }
 $page = $_GET["page"] ?? 1;
 $offset = $page*10 - 10;
 $absensi = query_all($conn, 
-  "SELECT absensi.tanggal, absensi.waktu_masuk, absensi.selfie_masuk_path, CONCAT(absensi.latitude_masuk, ', ', absensi.longitude_masuk) AS koordinat_masuk, absensi.waktu_pulang, absensi.selfie_pulang_path, CONCAT(absensi.latitude_pulang, ', ', absensi.longitude_pulang) AS koordinat_pulang, karyawan.nama, karyawan.email FROM absensi INNER JOIN karyawan ON karyawan.id=absensi.karyawan_id ORDER BY absensi.id DESC LIMIT 10 OFFSET ?", "i", $offset);
+  "SELECT absensi.tanggal, absensi.waktu_masuk, absensi.selfie_masuk_path, CONCAT(absensi.latitude_masuk, ', ', absensi.longitude_masuk) AS koordinat_masuk, absensi.waktu_pulang, absensi.selfie_pulang_path, CONCAT(absensi.latitude_pulang, ', ', absensi.longitude_pulang) AS koordinat_pulang, karyawan.nama, karyawan.email FROM absensi INNER JOIN karyawan ON karyawan.id=absensi.karyawan_id WHERE absensi.karyawan_id=? ORDER BY absensi.id DESC LIMIT 10 OFFSET ?", "ii", $_SESSION['user']['id'], $offset);
 $i = 1;
 ?>
 <!DOCTYPE html>
@@ -15,7 +19,7 @@ $i = 1;
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard - Admin</title>
+    <title>Dashboard - User</title>
     <link rel="stylesheet" href="/assets/style.css">
   </head>
   <body>
@@ -32,15 +36,8 @@ $i = 1;
       <a class="brand" href="/">Presensi</a>
       <label for="toggle" class="close-btn">&times;</label>
       <ul>
-        <li><a href="/admin" class="active">Dashboard</a></li>
-        <li class="dropdown">
-          <a href="#">User</a>
-          <ul>
-            <li><a href="/admin/user/list.php">List</a></li>
-            <li><a href="/admin/user/tambah.php">Tambah</a></li>
-          </ul>
-        </li>
-        <li><a href="/admin/riwayat-absensi.php">Riwayat Absensi</a></li>
+        <li><a href="/user" class="active">Dashboard</a></li>
+        <li><a href="/user/riwayat-absensi.php">Riwayat Absensi</a></li>
       </ul>
     </aside>
     <main>

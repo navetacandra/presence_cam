@@ -4,5 +4,5 @@ Latihan membuat aplikasi absensi berbasis geolocation dan kamera menggunakan PHP
 # TODO
 - [done] Design database
 - [done] Authentication
-- [] Dashboard
-- [] Presence record
+- [done] Dashboard
+- [done] Presence record

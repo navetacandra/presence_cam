@@ -1,6 +1,6 @@
 <?php
 session_start();
-$conn = new mysqli("localhost", "root", "root", "presence_cam");
+$conn = new mysqli("localhost", "root", "", "presence_cam");
 if($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
@@ -41,9 +41,11 @@ function query_all($conn, $sql, $type="", ...$args) {
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-function query_execute($conn, $sql, $type, ...$args): bool {
+function query_execute($conn, $sql, $type="", ...$args): bool {
   $stmt = $conn->prepare($sql);
-  $stmt->bind_param($type, ...$args);
+  if(!empty($type)) {
+    $stmt->bind_param($type, ...$args);
+  }
   $stmt->execute();
   return $stmt->affected_rows > 0;
 }
