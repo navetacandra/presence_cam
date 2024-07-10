@@ -66,10 +66,14 @@ $i = 1;
             <td><?= $ab['tanggal'] ?></td>
             <td><?= $ab['waktu_masuk'] ?></td>
             <td><?= $ab['koordinat_masuk'] ?></td>
-            <td><?= $ab['selfie_masuk_path'] ?></td>
+            <td><a href="<?= $ab['selfie_masuk_path'] ?>">Selfie masuk</a></td>
             <td><?= $ab['waktu_pulang'] ?></td>
             <td><?= $ab['koordinat_pulang'] ?></td>
-            <td><?= $ab['selfie_pulang_path'] ?></td>
+            <>
+              <?php if($ab['selfie_pulang_path'] != NULL) {?>
+                <a href="<?= $ab['selfie_pulang_path'] ?>">Selfie pulang</a>
+              <?php } ?>
+            </td>
           </tr>
           <?php endforeach; ?>
         </tbody>

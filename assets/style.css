@@ -169,3 +169,60 @@ tbody tr:nth-child(odd) {
   background-color: #dc3545;
   color: #fff;
 }
+
+.form-card-container {
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-card {
+  width: 30dvw;
+  border-radius: 10px;
+  box-shadow: 0 0 4px 4px #00000055;
+}
+
+.form-card h1 {
+  text-align: center;
+  margin: 2rem auto;
+}
+
+.form-control  {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding: 1rem;
+}
+
+.form-control label {
+  width: 25%;
+  display: block;
+}
+
+.form-control input, .form-control select {
+  display: block;
+  padding: .5rem;
+  width: 75%;
+  border-radius: 8px;
+  border: 1px solid #000;
+}
+
+.form-control button {
+  cursor: pointer;
+  margin-right: auto;
+  border: none;
+  border-radius: 10px;
+  background-color: #0d6efd;
+  color: #fff;
+  padding: 1rem 3rem;
+}
+
+@media screen and (max-width: 767px) {
+  .form-card {
+    width: 75dvw;
+  }
+}
