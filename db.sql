@@ -10,14 +10,14 @@ CREATE TABLE karyawan (
   password VARCHAR(255) NOT NULL,
   role_id INT NOT NULL,
   foto_profil VARCHAR(255) NOT NULL DEFAULT "/upload/profile/default.png",
-  CONSTRAINT fk_role FOREIGN KEY (role_id) REFRENCES roles(id) ON DELETE CASCADE
+  CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE
 );
 
 CREATE TABLE absensi (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   karyawan_id INT NOT NULL,
   tanggal DATE NOT NULL DEFAULT CURRENT_DATE,
-  waktu_masuk DATETIME NOT NULL DEFAULT CURRENT_DATETIME,
+  waktu_masuk DATETIME NOT NULL DEFAULT NOW(),
   waktu_pulang DATETIME,
   selfie_masuk_path VARCHAR(255) NOT NULL,
   selfie_pulang_path VARCHAR(255),
@@ -25,7 +25,7 @@ CREATE TABLE absensi (
   longitude_masuk DECIMAL(11, 8) NOT NULL,
   latitude_pulang DECIMAL(10, 8),
   longitude_pulang DECIMAL(11, 8),
-  CONSTRAINT fk_karyawan FOREIGN key (karyawan_id) REFRENCES karyawan(id) ON DELETE CASCADE
+  CONSTRAINT fk_karyawan FOREIGN key (karyawan_id) REFERENCES karyawan(id) ON DELETE CASCADE
 );
 
 -- roles Data
